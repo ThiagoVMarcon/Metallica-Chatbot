@@ -18,7 +18,7 @@ music(10, "Metal Militia", "Kill 'Em All", "Hetfield, Ulrich, Mustaine", "5:11")
 
 % RIDE THE LIGHTNING
 
-album(2, "Ride the Lightning", "second studio album", "1984", "47:26").
+album(2, "Ride the Lightning", "second studio album", "1984", "47:25").
 music(1, "Fight Fire with Fire", "Ride the Lightning", "Hetfield, Ulrich, Burton", "4:44").
 music(2, "Ride the Lightning", "Ride the Lightning", "Hetfield, Ulrich, Burton, Mustaine", "6:36").
 music(3, "For Whom the Bell Tolls", "Ride the Lightning", "Hetfield, Ulrich, Burton", "5:09").
@@ -61,35 +61,33 @@ music(2, "Sad but True", "Metallica", "Hetfield, Ulrich", "5:23").
 music(3, "Holier Than Thou", "Metallica", "Hetfield, Ulrich", "3:48").
 music(4, "The Unforgiven", "Metallica", "Hetfield, Ulrich, Hammett", "6:27").
 music(5, "Wherever I May Roam", "Metallica", "Hetfield, Ulrich", "6:46").
-music(5, "Don't Tread on Me", "Metallica", "Hetfield, Ulrich", "4:01").
-music(6, "Through the Never", "Metallica", "Hetfield, Ulrich, Hammett", "4:03").
-music(7, "Nothing Else Matters", "Metallica", "Hetfield, Ulrich", "6:29").
-music(8, "Of Wolf and Man", "Metallica", "Hetfield, Ulrich, Hammett", "4:17").
-music(9, "The God That Failed", "Metallica", "Hetfield, Ulrich", "5:05").
-music(10, "My Friend of Misery", "Metallica", "Newsted, Hetfield, Ulrich", "6:50").
-music(11, "The Struggle Within", "Metallica", "Hetfield, Ulrich", "3:54").
+music(6, "Don't Tread on Me", "Metallica", "Hetfield, Ulrich", "4:01").
+music(7, "Through the Never", "Metallica", "Hetfield, Ulrich, Hammett", "4:03").
+music(8, "Nothing Else Matters", "Metallica", "Hetfield, Ulrich", "6:29").
+music(9, "Of Wolf and Man", "Metallica", "Hetfield, Ulrich, Hammett", "4:17").
+music(10, "The God That Failed", "Metallica", "Hetfield, Ulrich", "5:05").
+music(11, "My Friend of Misery", "Metallica", "Newsted, Hetfield, Ulrich", "6:50").
+music(12, "The Struggle Within", "Metallica", "Hetfield, Ulrich", "3:54").
 
-# ------------------------------------------------------------------------------
+% LOAD
 
-# Load, sixth studio album, 1996, 78:59
+album(6, "Load", "sixth studio album", "1996", "78:59").
+music(1, "Ain't My Bitch", "Load", "Hetfield, Ulrich", "5:04").
+music(1, "2 X 4", "Load", "Hetfield, Ulrich, Hammet", "5:28").
+music(1, "The House Jack Built", "Load", "Hetfield, Ulrich, Hammet", "6:39").
+music(1, "Until It Sleeps", "Load", "Hetfield, Ulrich", "4:30").
+music(1, "King Nothing", "Load",  "Hetfield, Ulrich, Hammet", "5:28").
+music(1, "Hero of the Day", "Load", "Hetfield, Ulrich, Hammet", "4:22").
+music(1, "Bleeding Me", "Load", "Hetfield, Ulrich, Hammet", "8:18").
+music(1, "Cure", "Load", "Hetfield, Ulrich", "4:54").
+music(1, "Poor Twisted Me", "Load", "Hetfield, Ulrich", "4:00").
+music(1, "Wasting My Hate", "Load", "Hetfield, Ulrich, Hammet", "3:57").
+music(1, "Mama Said", "Load", "Hetfield, Ulrich", "5:19").
+music(1, "Thorn Within", "Load", "Hetfield, Ulrich, Hammet", "5:51").
+music(1, "Ronnie", "Load", "Hetfield, Ulrich", "5:17").
+music(1, "The Outlaw Torn", "Load",  "Hetfield, Ulrich", "9:52").
 
-# 1.	"Ain't My Bitch"  	                    Hetfield, Ulrich	        5:04
-# 2.	"2 X 4"  	                            Hetfield, Ulrich, Hammet	5:28
-# 3.	"The House Jack Built"  	            Hetfield, Ulrich, Hammet	6:39
-# 4.	"Until It Sleeps"  	                    Hetfield, Ulrich	        4:30
-# 5.	"King Nothing"  	                    Hetfield, Ulrich, Hammet	5:28
-# 6.	"Hero of the Day"  	                    Hetfield, Ulrich, Hammet	4:22
-# 7.	"Bleeding Me"  	                        Hetfield, Ulrich, Hammet	8:18
-# 8.	"Cure"  	                            Hetfield, Ulrich	        4:54
-# 9.	"Poor Twisted Me"  	                    Hetfield, Ulrich	        4:00
-# 10.	"Wasting My Hate"  	                    Hetfield, Ulrich, Hammet	3:57
-# 11.	"Mama Said"  	                        Hetfield, Ulrich	        5:19
-# 12.	"Thorn Within"  	                    Hetfield, Ulrich, Hammet	5:51
-# 13.	"Ronnie"  	                            Hetfield, Ulrich	        5:17
-# 14.	"The Outlaw Torn"  	                    Hetfield, Ulrich	        9:52
-# Total length:	78:59
-
-# ------------------------------------------------------------------------------
+% RELOAD
 
 # ReLoad, seventh album, 1997, 1:15:56
 

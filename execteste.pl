@@ -57,13 +57,20 @@ translate("ola", "tchau"):-!.
 translate("bem", "mal"):-!.
 translate(X, X). % catch-all clause for all words not to be translated
 
-process_Pattern(["what","is","your","name"|_], ["Hey","my","name","is","Robert","I'm","a","chatbot","that","really","loves","Metalica!"]).
-process_Pattern(["what","is","your","favorite", "music"|_], ["My","favorite","music","is", "Fade to Black","but", "I","really","like", X , "aswell"]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,X,A,_,_).
-process_Pattern(["what","do","you","think","about","metallica", "after","black"|_],["Metallica","created", "a","whole", "genre", "of", "music", ",", "Thrash Metal",",", "and", "then", "walked", "away", "from", "it", "in", "1990", "because", "of", "greed",".", "Some", "ppl", "say", "to", "me", "get", "over", "it", "blah", "blah", "blah", "but", "music", "to", "me", "is", "after", "family", "and", "friends",".", "I", "loath", "anyone", "who", "turns", "their", "back", "on", "a", "legion", "of", "fans", "and", "a", "genre", "of", "music", "and", "walk", "away", "because", "of", "greed",".", "They", "were", "not", "poor", "when", "they", "released", "the", "black", "album", "they", "were", "just", "greedy",".", "Sad"]). % voce acha que o metalica se vendeu no black album, oque voce acha do black album
-process_Pattern(["what","is","your","favorite","album"|_],["My","favorite","album","is", "Master of Puppets","but", "I","really","like", X, "aswell"]) :- random_between(1,2,A), album(A,X,_,_,_). % albus favoritos
-process_Pattern(["what","year",_,"metallica"|_], ["Metallica","was","created","in", "1981"]).
-process_Pattern(["what","year",_,"the","band"|_], ["Metallica","was","created","in", "1981"]). % ano de criaçao da banda
-process_Pattern(["what","year","is",X|_], [[X|Resto],"is","from",Y,"!"]) :- album(_,[A|Resto],_,Y,_).% ano de lançamentos do album
+process_Pattern(["what","is","your","name"|_], ["My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_Pattern(["what","year",_,"metallica"|_], ["Metallica was created in 1981, in Los Angeles."]).
+process_Pattern(["what","year",_,"the","band"|_], ["Metallica was formed in 1981, in Los Angeles."]).
+process_Pattern(["what","is","your","favorite","album"|_],["My favorite album is Master of Puppets but I really like", X, "too"]) :- random_between(1,2,A), album(A,X,_,_,_). % albus favoritos
+process_Pattern(["what","is","your","favorite", "music"|_], ["My favorite music is Fade to Black but I really like", X , "aswell"]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,X,A,_,_).
+process_Pattern(["how","many", "albums"|_], ["Metallica has released a total of 11 studio albums."]). % quantos albuns
+%%%%% process_Pattern(["what","is", "the",  "albums"|_], ["Metallica has released a total of 11 studio albums."]). de qual ano é X album
+% % % % process_Pattern(["what","year","is",X|_], [[X|Resto],"is","from",Y,"!"]) :- album(_,[A|Resto],_,Y,_).% ano de lançamentos do album
+% % % % quem sao os membros atuais
+process_Pattern(["who","is", "the", "vocalist"|_], ["James Hetfield is the current and only vocalist that Metallica has ever had."]). % vocalista
+process_Pattern(["who","is", "the", "drummer"|_], ["Lars Ulrich is the current and only drummer that Metallica has ever had."]). % baterista
+process_Pattern(["who","is", "the", "bassist"|_], ["Robert Trujillo is the current bassist of Metallica."]). % baixista
+process_Pattern(["who","is", "the", "guitarist"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
+process_Pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
 % linha de bateria
 % ||  || guitarra
 % ||  || baixo
@@ -72,12 +79,13 @@ process_Pattern(["what","year","is",X|_], [[X|Resto],"is","from",Y,"!"]) :- albu
 % oque voce acha dos ultimos albuns do metalica 
 % opiniao sobre sobre todos os membro
 % adicionar idades dos integrantes
-% musicas mais curtas
+% quais são todos os albuns
 process_Pattern(["what","is","the","shortest","album"|_],["It","is","Ride The Lightning","which","has","Trapped Under Eyes","as","its","shortest","song"]). % album mais curto
 process_Pattern(["what","is","the","shortest","music"|_],["It","is","Motorbreath","which","is","the","third","song","from","Metallicas", "first","album!"]). % musica mais curta
 process_Pattern(["what","is","the","longest", "music"|_],["It","is","Inamorata","which","is","the","final","song","from","Metallicas", "latest","album!"]).% musicas mais longas
 process_Pattern(["what","is","the","longest","album"|_],["It","is","Load","which","has","The Outlaw Torn","as","its","longest","song"]).% albuns mais longos
 % musicas instrumentais
+process_Pattern(["what","do","you","think","about","metallica", "after","black"|_],["Metallica created a whole genre of music, Thrash Metal, and then walked away from it in 1990 because of greed. Some ppl say to me get over it blah blah blah but music to me is after family and friends. I loath anyone who turns their back on a legion of fans and a genre of music and walk away because of greed. They were not poor when they released the black album, they were just greedy. Sad."]). % voce acha que o metalica se vendeu no black album, oque voce acha do black album
 
 process_Pattern([_|Resto],Y) :- process_Pattern(Resto,Y).
 process_Pattern([],["Sorry","couldn't","quite","catch","you","man"]).
