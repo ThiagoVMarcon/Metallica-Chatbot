@@ -1,92 +1,73 @@
-test :- write('Metallica is an American heavy metal band. The band was formed in 1981 in Los Angeles by vocalist and guitarist James Hetfield and drummer Lars Ulrich, and has been based in San Francisco for most of its career.').
-
-% FACTS 
+% DATABASE OF FACTS 
 
 % Albums: 
 
 % KILL EM ALL
 
-album("Kill 'Em All", "first studio album", "1983", "51:20").
-music(1, "Hit the Lights", "Hetfield, Ulrich", "4:15", "Kill 'Em All").
-music(2, "The Four Horsemen", "Hetfield, Ulrich, Mustaine", "7:12", "Kill 'Em All").
-music(3, "Motorbreath",	"Hetfield",	"3:07", "Kill 'Em All").
-music(4, "Jump in the Fire", "Hetfield, Ulrich, Mustaine", "4:41", "Kill 'Em All").
-music(5, "(Anesthesia) Pulling Teeth", "Burton", "4:14", "Kill 'Em All").
-music(6, "Whiplash", "Hetfield, Ulrich", "4:08", "Kill 'Em All").
-music(7, "Phantom Lord", "Hetfield, Ulrich, Mustaine", "5:01", "Kill 'Em All").
-music(8, "No Remorse", "Hetfield, Ulrich", "6:26", "Kill 'Em All").
-music(9, "Seek & Destroy", "Hetfield, Ulrich", "6:54", "Kill 'Em All").
-music(10, "Metal Militia", "Hetfield, Ulrich, Mustaine", "5:11", "Kill 'Em All").
+album(1, "Kill Em All", "first studio album", "1983", "51:20").
+music(1, "Hit the Lights", "Kill 'Em All", "Hetfield, Ulrich", "4:15").
+music(2, "The Four Horsemen", "Kill 'Em All", "Hetfield, Ulrich, Mustaine", "7:12").
+music(3, "Motorbreath", "Kill 'Em All",	"Hetfield",	"3:07").
+music(4, "Jump in the Fire", "Kill 'Em All", "Hetfield, Ulrich, Mustaine", "4:41").
+music(5, "(Anesthesia) Pulling Teeth", "Kill 'Em All", "Burton", "4:14").
+music(6, "Whiplash", "Kill 'Em All", "Hetfield, Ulrich", "4:08").
+music(7, "Phantom Lord", "Kill 'Em All", "Hetfield, Ulrich, Mustaine", "5:01").
+music(8, "No Remorse", "Kill 'Em All", "Hetfield, Ulrich", "6:26").
+music(9, "Seek & Destroy", "Kill 'Em All", "Hetfield, Ulrich", "6:54").
+music(10, "Metal Militia", "Kill 'Em All", "Hetfield, Ulrich, Mustaine", "5:11").
 
 % RIDE THE LIGHTNING
 
-album("Ride the Lightning", "second studio album", "1984", "47:26").
-music(1, "Fight Fire with Fire", "Hetfield, Ulrich, Burton", "4:44", "Ride the Lightning").
-music(2, "Ride the Lightning", "Hetfield, Ulrich, Burton, Mustaine", "6:36", "Ride the Lightning").
-music(3, "For Whom the Bell Tolls", "Hetfield, Ulrich, Burton", "5:09", "Ride the Lightning").
-music(4, "Fade to Black", "Hetfield, Ulrich, Burton, Hammett", "6:57", "Ride the Lightning").
-music(5, "Trapped Under Ice", "Hetfield, Ulrich, Hammett", "4:04", "Ride the Lightning").
-music(6, "Escape", "Hetfield, Ulrich, Hammett", "4:24", "Ride the Lightning").
-music(7, "Creeping Death", "Hetfield, Ulrich, Burton, Hammett", "6:36", "Ride the Lightning").
-music(8, "The Call of Ktulu", "Hetfield, Ulrich, Burton, Mustaine", "8:53", "Ride the Lightning").
+album(2, "Ride the Lightning", "second studio album", "1984", "47:26").
+music(1, "Fight Fire with Fire", "Ride the Lightning", "Hetfield, Ulrich, Burton", "4:44").
+music(2, "Ride the Lightning", "Ride the Lightning", "Hetfield, Ulrich, Burton, Mustaine", "6:36").
+music(3, "For Whom the Bell Tolls", "Ride the Lightning", "Hetfield, Ulrich, Burton", "5:09").
+music(4, "Fade to Black", "Ride the Lightning", "Hetfield, Ulrich, Burton, Hammett", "6:57").
+music(5, "Trapped Under Ice", "Ride the Lightning", "Hetfield, Ulrich, Hammett", "4:04").
+music(6, "Escape", "Ride the Lightning", "Hetfield, Ulrich, Hammett", "4:24").
+music(7, "Creeping Death", "Ride the Lightning", "Hetfield, Ulrich, Burton, Hammett", "6:36").
+music(8, "The Call of Ktulu", "Ride the Lightning", "Hetfield, Ulrich, Burton, Mustaine", "8:53").
 
 % MASTER OF PUPPETS
 
-album("Master of Puppets", "third album", "1986", "54:47").
+album(3, "Master of Puppets", "third album", "1986", "54:47").
+music(1, "Battery", "Master of Puppets", "Hetfield, Ulrich", "5:12").
+music(2, "Master of Puppets", "Master of Puppets", "Hetfield, Ulrich, Burton, Hammett",	"8:36").
+music(3, "The Thing That Should Not Be", "Master of Puppets","Hetfield, Ulrich, Hammett", "6:37").
+music(4, "Welcome Home (Sanitarium)", "Master of Puppets", "Hetfield, Ulrich, Hammett", "6:27").
+music(5, "Disposable Heroes", "Master of Puppets", "Hetfield, Ulrich, Hammett", "8:17").
+music(6, "Leper Messiah", "Master of Puppets", "Hetfield, Ulrich", "5:40").
+music(7, "Orion", "Master of Puppets", "Burton, Hetfield, Ulrich", "8:28").
+music(8, "Damage, Inc.", "Master of Puppets", "Hetfield, Ulrich, Burton, Hammett", "5:29").
 
-# "Battery"   			Hetfield, Ulrich			5:12
+$ ...AND JUSTICE FOR ALL
 
-# "Master of Puppets"   		Hetfield, Ulrich, Burton, Hammett	8:36
+album(4, "And Justice For All", "fourth album", "1988", "65:33").
+music(1, "Blackened", "And Justice For All", "Hetfield, Ulrich, Newsted", "6:41").
+music(2, "And Justice for All", "And Justice For All", "Hetfield, Ulrich, Hammett", "9:47"). 
+music(3, "Eye of the Beholder", "And Justice For All", "Hetfield, Ulrich, Hammett", "6:30").
+music(4, "One", "And Justice For All", "Hetfield, Ulrich", "7:26").
+music(5, "The Shortest Straw", "And Justice For All", "Hetfield, Ulrich", "6:36").
+music(6, "Harvester of Sorrow", "And Justice For All", "Hetfield, Ulrich", "5:46"). 
+music(7, "The Frayed Ends of Sanity", "And Justice For All", "Hetfield, Ulrich, Hammett", "7:44"). 
+music(8, "To Live Is to Die", "And Justice For All", "Hetfield, Ulrich, Burton", "9:49").  
+music(9, "Dyers Eve", "And Justice For All", "Hetfield, Ulrich, Hammett", "5:13").		
 
-# "The Thing That Should Not Be"  Hetfield, Ulrich, Hammett 		6:37
+% METALLICA (THE BLACK ALBUM)
 
-# "Welcome Home (Sanitarium)"   	Hetfield, Ulrich, Hammett	        6:27
-
-# "Disposable Heroes"   		Hetfield, Ulrich, Hammett		8:17
-
-# "Leper Messiah"   	    	Hetfield, Ulrich			5:40
-
-# "Orion"  			Burton, Hetfield, Ulrich		8:28
-
-# "Damage, Inc."   		Hetfield, Ulrich, Burton, Hammett	5:29
-# ------------------------------------------------------------------------------
-# ...And Justice For All, fourth album, 1988, 65:33
-    
-# "Blackened" 			Hetfield, Ulrich, Newsted 		6:41
-
-# "...And Justice for All"	Hetfield, Ulrich, Hammett		9:47 
-
-# "Eye of the Beholder" 	 	Hetfield, Ulrich, Hammett	 	6:30
-    
-# "One" (Hetfield, Ulrich)	Hetfield, Ulrich			7:26
-    
-# "The Shortest Straw" 		Hetfield, Ulrich 			6:36
-    
-# "Harvester of Sorrow" 		Hetfield, Ulrich 			5:46
-    
-# "The Frayed Ends of Sanity" 	Hetfield, Ulrich, Hammett		7:44
-    
-# "To Live Is to Die" 		Hetfield, Ulrich, Burton 		9:49
-    
-# "Dyers Eve"			Hetfield, Ulrich, Hammett		5:13		
-
-# ------------------------------------------------------------------------------
-
-# Metallica(The Black album),fifth studio album, 1991, 62:31
-
-# 1.	"Enter Sandman"  	                    Hetfield, Ulrich, Hammett	5:31
-# 2.	"Sad but True"  	                    Hetfield, Ulrich	        5:23
-# 3.	"Holier Than Thou"                      Hetfield, Ulrich	        3:48
-# 4.	"The Unforgiven"  	                    Hetfield, Ulrich, Hammett	6:27
-# 5.	"Wherever I May Roam"  	                Hetfield, Ulrich	        6:46
-# 6.	"Don't Tread on Me"  	                Hetfield, Ulrich	        4:01
-# 7.	"Through the Never"  	                Hetfield, Ulrich, Hammett	4:03
-# 8.	"Nothing Else Matters"                  Hetfield, Ulrich	        6:29
-# 9.	"Of Wolf and Man"  	                    Hetfield, Ulrich, Hammett	4:17
-# 10.	"The God That Failed"  	                Hetfield, Ulrich	        5:05
-# 11.	"My Friend of Misery"  	                Newsted, Hetfield, Ulrich	6:50
-# 12.	"The Struggle Within"  	                Hetfield, Ulrich	        3:54
-# Total length: 62:31
+album(5, "Metallica", "fifth studio album", "1991", "62:31").
+music(1, "Enter Sandman", "Metallica", "Hetfield, Ulrich, Hammett", "5:31").
+music(2, "Sad but True", "Metallica", "Hetfield, Ulrich", "5:23").
+music(3, "Holier Than Thou", "Metallica", "Hetfield, Ulrich", "3:48").
+music(4, "The Unforgiven", "Metallica", "Hetfield, Ulrich, Hammett", "6:27").
+music(5, "Wherever I May Roam", "Metallica", "Hetfield, Ulrich", "6:46").
+music(5, "Don't Tread on Me", "Metallica", "Hetfield, Ulrich", "4:01").
+music(6, "Through the Never", "Metallica", "Hetfield, Ulrich, Hammett", "4:03").
+music(7, "Nothing Else Matters", "Metallica", "Hetfield, Ulrich", "6:29").
+music(8, "Of Wolf and Man", "Metallica", "Hetfield, Ulrich, Hammett", "4:17").
+music(9, "The God That Failed", "Metallica", "Hetfield, Ulrich", "5:05").
+music(10, "My Friend of Misery", "Metallica", "Newsted, Hetfield, Ulrich", "6:50").
+music(11, "The Struggle Within", "Metallica", "Hetfield, Ulrich", "3:54").
 
 # ------------------------------------------------------------------------------
 
