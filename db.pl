@@ -71,7 +71,7 @@ music(12, "The Struggle Within", "Metallica", "Hetfield, Ulrich", "3:54").
 
 % LOAD
 
-album(6, "Load", "sixth studio album", "1996", "78:59").
+album(6, "Load", "sixth studio album", "1996", "1:17:56").
 music(1, "Ain't My Bitch", "Load", "Hetfield, Ulrich", "5:04").
 music(1, "2 X 4", "Load", "Hetfield, Ulrich, Hammet", "5:28").
 music(1, "The House Jack Built", "Load", "Hetfield, Ulrich, Hammet", "6:39").
@@ -89,43 +89,36 @@ music(1, "The Outlaw Torn", "Load",  "Hetfield, Ulrich", "9:52").
 
 % RELOAD
 
-# ReLoad, seventh album, 1997, 1:15:56
+album(7, "ReLoad", "seventh album", "1997", "1:15:56").
 
-# 1.	"Fuel"  	                            Hetfield, Ulrich, Hammett	4:29
-# 2.	"The Memory Remains"  	                Hetfield, Ulrich	        4:39
-# 3.	"Devil's Dance"  	                    Hetfield, Ulrich	        5:18
-# 4.	"The Unforgiven II"  	                Hetfield, Ulrich, Hammett	6:36
-# 5.	"Better than You"  	                    Hetfield, Ulrich	        5:21
-# 6.	"Slither"  	                            Hetfield, Ulrich, Hammett	5:13
-# 7.	"Carpe Diem Baby"  	                    Hetfield, Ulrich, Hammett	6:12
-# 8.	"Bad Seed"  	                        Hetfield, Ulrich, Hammett	4:05
-# 9.	"Where The Wild Things Are"             Hetfield, Ulrich, Newsted	6:52
-# 10.	"Prince Charming"  	                    Hetfield, Ulrich	        6:04
-# 11.	"Low Man's Lyric"  	                    Hetfield, Ulrich	        7:36
-# 12.	"Attitude"  	                        Hetfield, Ulrich	        5:16
-# 13.	"Fixxxer"  	                            Hetfield, Ulrich, Hammett	8:14
-# Total length: 1:15:56
+music(1, "Fuel", "Hetfield, Ulrich, Hammett", "4:29").
+music(2, "The Memory Remains", "Hetfield, Ulrich", "4:39").
+music(3, "Devil's Dance", "Hetfield, Ulrich", "5:18").
+music(4, "The Unforgiven II", "Hetfield, Ulrich, Hammett", "6:36").
+music(5, "Better than You",  "Hetfield, Ulrich", "5:21").
+music(6, "Slither", "Hetfield, Ulrich, Hammett", "5:13").
+music(7, "Carpe Diem Baby", "Hetfield, Ulrich, Hammett", "6:12").
+music(8, "Bad Seed", "Hetfield, Ulrich, Hammett", "4:05").
+music(9, "Where The Wild Things Are", "Hetfield, Ulrich, Newsted", "6:52").
+music(10, "Prince Charming", "Hetfield, Ulrich", "6:04").
+music(11, "Low Man's Lyric", "Hetfield, Ulrich", "7:36").
+music(12, "Attitude", "Hetfield, Ulrich", "5:16").
+music(13, "Fixxxer", "Hetfield, Ulrich, Hammett", "8:14").
 
-# ------------------------------------------------------------------------------
+% ST ANGER
 
-# St Anger, eighth studio album, 2003, 75:04
-
-# All songs in this album were made by James Hetfield, Lars Ulrich, Kirk Hammett and Bob Rock.
-
-# 1.	"Frantic"	                                                         5:50
-# 2.	"St. Anger"	                                                         7:21
-# 3.	"Some Kind of Monster"	                                             8:25
-# 4.	"Dirty Window"	                                                     5:25
-# 5.	"Invisible Kid"	                                                     8:30
-# 6.	"My World"	                                                         5:46
-# 7.	"Shoot Me Again"	                                                 7:10
-# 8.	"Sweet Amber"	                                                     5:27
-# 9.	"The Unnamed Feeling"	                                             7:08
-# 10.	"Purify"	                                                         5:14
-# 11.	"All Within My Hands"	                                             8:48
-# Total length:	75:04
-
-# ------------------------------------------------------------------------------
+album(8, "St Anger", "eighth studio album", "2003", "75:04").
+music(1,"Frantic", "Hetfield, Ulrich, Hammett, Rock", "5:50").
+music(2,"St. Anger", "Hetfield, Ulrich, Hammett, Rock", "7:21").
+music(3,"Some Kind of Monster", "Hetfield, Ulrich, Hammett, Rock", "8:25").
+music(4,"Dirty Window", "Hetfield, Ulrich, Hammett, Rock", "5:25").
+music(5,"Invisible Kid", "Hetfield, Ulrich, Hammett, Rock",	"8:30").
+music(6,"My World", "Hetfield, Ulrich, Hammett, Rock", "5:46").
+music(7,"Shoot Me Again", "Hetfield, Ulrich, Hammett, Rock", "7:10").
+music(8,"Sweet Amber", "Hetfield, Ulrich, Hammett, Rock", "5:27").
+music(9,"The Unnamed Feeling", "Hetfield, Ulrich, Hammett, Rock", "7:08").
+music(10,"Purify", "Hetfield, Ulrich, Hammett, Rock", "5:14").
+music(11,"All Within My Hands", "Hetfield, Ulrich, Hammett, Rock", "8:48").
 
 # Death Magnetic, ninth studio album, 2008
 

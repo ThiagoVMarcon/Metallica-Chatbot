@@ -80,6 +80,8 @@ process_Pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitar
 % opiniao sobre sobre todos os membro
 % adicionar idades dos integrantes
 % quais são todos os albuns
+% tamanho de todos os albuns
+% ano de todos os albuns
 process_Pattern(["what","is","the","shortest","album"|_],["It","is","Ride The Lightning","which","has","Trapped Under Eyes","as","its","shortest","song"]). % album mais curto
 process_Pattern(["what","is","the","shortest","music"|_],["It","is","Motorbreath","which","is","the","third","song","from","Metallicas", "first","album!"]). % musica mais curta
 process_Pattern(["what","is","the","longest", "music"|_],["It","is","Inamorata","which","is","the","final","song","from","Metallicas", "latest","album!"]).% musicas mais longas
