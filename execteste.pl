@@ -20,8 +20,10 @@ compare_strings_ignore_case(String1, String2, Result) :-
     string_lower(String2, LowercaseString2),
     string_compare(LowercaseString1, LowercaseString2, Result).
 
-compare_album([X|Resto1],[X|Resto2],). 
-comapare_album(_,_) :- !
+compare_album(X,Y) :- album(_,Y,_,_,_),split_string(Y, "\s", "\s", [Yn|_]) ,string_lower(Yn, Y2), Y2 == X.
+
+compare_music2(X,Y) :- music(_,Y,_,_,_),split_string(Y, "\s", "\s", [_, Yn|_]) ,string_lower(Yn, Y2), Y2 == X.
+compare_music(X,Y) :- music(_,Y,_,_,_),split_string(Y, "\s", "\s", [Yn|_]) ,string_lower(Yn, Y2), Y2 == X.
 
 caracter_especial('.').
 caracter_especial(',').
@@ -57,14 +59,20 @@ translate("ola", "tchau"):-!.
 translate("bem", "mal"):-!.
 translate(X, X). % catch-all clause for all words not to be translated
 
+
+process_Pattern(["i'm", X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_Pattern(["i'm","called",X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_Pattern(["i","am", X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_Pattern(["i","am","called",X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_Pattern(["like", "the", X|_],Y) :- compare_music2(X,X2),random_between(1,2,R), responses(R, X2, Y).
+process_Pattern(["like", X|_],Y) :- compare_music(X,X2),random_between(1,2,R), responses(R, X2, Y).
 process_Pattern(["what","is","your","name"|_], ["My name is Cliff, I'm a chatbot that really loves Metallica!"]).
 process_Pattern(["what","year",_,"metallica"|_], ["Metallica was created in 1981, in Los Angeles."]).
 process_Pattern(["what","year",_,"the","band"|_], ["Metallica was formed in 1981, in Los Angeles."]).
 process_Pattern(["what","is","your","favorite","album"|_],["My favorite album is Master of Puppets but I really like", X, "too"]) :- random_between(1,2,A), album(A,X,_,_,_). % albus favoritos
 process_Pattern(["what","is","your","favorite", "music"|_], ["My favorite music is Fade to Black but I really like", X , "aswell"]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,X,A,_,_).
-process_Pattern(["how","many", "albums"|_], ["Metallica has released a total of 11 studio albums."]). % quantos albuns
-%%%%% process_Pattern(["what","is", "the",  "albums"|_], ["Metallica has released a total of 11 studio albums."]). de qual ano é X album
-% % % % process_Pattern(["what","year","is",X|_], [[X|Resto],"is","from",Y,"!"]) :- album(_,[A|Resto],_,Y,_).% ano de lançamentos do album
+process_Pattern(["how","many", "albums"|_], ["Metallica has released a total of 11 studio albums.","\n", "foi"]). % quantos albuns
+process_Pattern(["what","year","is",X|_], [Y,"is","from",Z,"!"]) :- compare_album(X,Y), album(_,Y,_,Z,_).% ano de lançamentos do album
 % % % % quem sao os membros atuais
 process_Pattern(["who","is", "the", "vocalist"|_], ["James Hetfield is the current and only vocalist that Metallica has ever had."]). % vocalista
 process_Pattern(["who","is", "the", "drummer"|_], ["Lars Ulrich is the current and only drummer that Metallica has ever had."]). % baterista
