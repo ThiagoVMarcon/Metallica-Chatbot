@@ -1,3 +1,10 @@
+% DATABASE OF RESPONSES
+
+% esta_no_dicionario(X).
+
+responses(1, X, [X, "is pretty cool! Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
+responses(2, X, [X, "is pretty bad... Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
+
 % DATABASE OF FACTS 
 
 % Albums: 
