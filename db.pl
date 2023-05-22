@@ -1,9 +1,32 @@
 % DATABASE OF RESPONSES
 
+is_greeting(X) :- 
+    greeting(X).
+greeting("hey").
+greeting("ola").
+greeting("oi").
+greeting("hello").
+greeting("heya").
+greeting("sup").
+greeting("hi").
+
+is_same_name_of_album(X) :-
+    album_name(X).
+album_name("kill").
+album_name("ride").
+album_name("master").
+album_name("and").
+album_name("st").
+
+
 % esta_no_dicionario(X).
 
 responses(1, X, [X, "is pretty cool! Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
 responses(2, X, [X, "is pretty bad... Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
+responses(3, X, [X, "is great! My favorite song from the album is", Y]) :- random_between(1,8,R), music(R,Y,X,_,_).
+responses(4, X, [X, "is ok... I would rather listen to", Y, "though"]) :- random_between(1,8,R), album(R,Y,_,_,_).
+
+
 
 % DATABASE OF FACTS 
 
