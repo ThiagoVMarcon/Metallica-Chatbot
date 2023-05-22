@@ -60,12 +60,17 @@ translate("bem", "mal"):-!.
 translate(X, X). % catch-all clause for all words not to be translated
 
 
+process_Pattern(["are","you","called","cliff"], ["Yep!"]).
+process_Pattern(["is","your","name","cliff"], ["Yep!"]).
+process_Pattern([X, "cliff"],["Hey there!"]) :- is_greeting(X).
 process_Pattern(["i'm", X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
 process_Pattern(["i'm","called",X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
 process_Pattern(["i","am", X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
 process_Pattern(["i","am","called",X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_Pattern(["like",X|_],["Do you mean the album or the song? Either case I think they are both pretty great!"]) :- is_same_name_of_album(X).
 process_Pattern(["like", "the", X|_],Y) :- compare_music2(X,X2),random_between(1,2,R), responses(R, X2, Y).
 process_Pattern(["like", X|_],Y) :- compare_music(X,X2),random_between(1,2,R), responses(R, X2, Y).
+process_Pattern(["like", X|_],Y) :- compare_album(X,X2),random_between(3,4,R), responses(R, X2, Y).
 process_Pattern(["what","is","your","name"|_], ["My name is Cliff, I'm a chatbot that really loves Metallica!"]).
 process_Pattern(["what","year",_,"metallica"|_], ["Metallica was created in 1981, in Los Angeles."]).
 process_Pattern(["what","year",_,"the","band"|_], ["Metallica was formed in 1981, in Los Angeles."]).
