@@ -1,23 +1,14 @@
-% DATABASE OF RESPONSES
+% DATABASE
 
-is_greeting(X) :- 
-    greeting(X).
-greeting("hey").
-greeting("ola").
-greeting("oi").
+% auxiliar functions
+
+is_greeting(X) :- greeting(X).
+greeting("hi").
 greeting("hello").
+greeting("hey").
 greeting("heya").
 greeting("sup").
-greeting("hi").
-
-is_same_name_of_album(X) :-
-    album_name(X).
-album_name("kill").
-album_name("ride").
-album_name("master").
-album_name("and").
-album_name("st").
-
+greeting("yo").
 
 % esta_no_dicionario(X).
 
@@ -27,10 +18,51 @@ responses(3, X, [X, "is great! My favorite song from the album is", Y]) :- rando
 responses(4, X, [X, "is ok... I would rather listen to", Y, "though"]) :- random_between(1,8,R), album(R,Y,_,_,_).
 
 
+% patterns
 
-% DATABASE OF FACTS 
+process_pattern(["are","you","called","cliff?"], ["Yep!"]).
+process_pattern(["is","your","name","cliff?"], ["Yep!"]).
+process_pattern([X, "cliff"],["Hey there!"]) :- is_greeting(X).
+process_pattern([X|_],["Hey there!"]) :- is_greeting(X).
+process_pattern(["i'm", X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_pattern(["i'm","called",X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_pattern(["i","am", X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_pattern(["i","am","called",X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_pattern(["like",X|_],["Do you mean the album or the song? Either case I think they are both pretty great!"]) :- same_name_album_song(X).
+process_pattern(["like", "the", X|_],Y) :- compare_music2(X,X2),random_between(1,2,R), responses(R, X2, Y).
+process_pattern(["like", X|_],Y) :- compare_music(X,X2),random_between(1,2,R), responses(R, X2, Y).
+process_pattern(["like", X|_],Y) :- compare_album(X,X2),random_between(3,4,R), responses(R, X2, Y).
+process_pattern(["what","is","your","name"|_], ["My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_pattern(["what","year",_,"metallica"|_], ["Metallica was created in 1981, in Los Angeles."]).
+process_pattern(["what","year",_,"the","band"|_], ["Metallica was formed in 1981, in Los Angeles."]).
+process_pattern(["what","is","your","favorite","album"|_],["My favorite album is Master of Puppets but I really like", X, "too"]) :- random_between(1,2,A), album(A,X,_,_,_). % albus favoritos
+process_pattern(["what","is","your","favorite", "music"|_], ["My favorite music is Fade to Black but I really like", X , "aswell"]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,X,A,_,_).
+process_pattern(["how","many", "albums"|_], ["Metallica has released a total of 11 studio albums.","\n", "foi"]). % quantos albuns
+process_pattern(["what","year","is",X|_], [Y,"is","from",Z,"!"]) :- compare_album(X,Y), album(_,Y,_,Z,_).% ano de lançamentos do album
+process_pattern(["who","is", "the", "vocalist"|_], ["James Hetfield is the current and only vocalist that Metallica has ever had."]). % vocalista
+process_pattern(["who","is", "the", "drummer"|_], ["Lars Ulrich is the current and only drummer that Metallica has ever had."]). % baterista
+process_pattern(["who","is", "the", "bassist"|_], ["Robert Trujillo is the current bassist of Metallica."]). % baixista
+process_pattern(["who","is", "the", "guitarist"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
+process_pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
+process_pattern(["what","is","the","shortest","album"|_],["It","is","Ride The Lightning","which","has","Trapped Under Eyes","as","its","shortest","song"]). % album mais curto
+process_pattern(["what","is","the","shortest","music"|_],["It","is","Motorbreath","which","is","the","third","song","from","Metallicas", "first","album!"]). % musica mais curta
+process_pattern(["what","is","the","longest", "music"|_],["It","is","Inamorata","which","is","the","final","song","from","Metallicas", "latest","album!"]).% musicas mais longas
+process_pattern(["what","is","the","longest","album"|_],["It","is","Load","which","has","The Outlaw Torn","as","its","longest","song"]).% albuns mais longos
+process_pattern(["what","do","you","think","about","metallica", "after","black"|_],["Metallica created a whole genre of music, Thrash Metal, and then walked away from it in 1990 because of greed. Some ppl say to me get over it blah blah blah but music to me is after family and friends. I loath anyone who turns their back on a legion of fans and a genre of music and walk away because of greed. They were not poor when they released the black album, they were just greedy. Sad."]). % voce acha que o metalica se vendeu no black album, oque voce acha do black album
+process_pattern([_|Resto],Y) :- process_pattern(Resto,Y).
+process_pattern([],["Sorry","couldn't","quite","catch","you","man"]).
 
-% Albums: 
+
+same_name_album_song(X) :- album_name(X).
+album_name("kill").
+album_name("ride").
+album_name("master").
+album_name("and").
+album_name("st").
+album_name("72").
+
+
+% ALBUMS: 
 
 % KILL EM ALL
 
@@ -119,91 +151,96 @@ music(1, "The Outlaw Torn", "Load",  "Hetfield, Ulrich", "9:52").
 
 % RELOAD
 
-album(7, "ReLoad", "seventh album", "1997", "1:15:56").
+album(7, "Reload", "seventh album", "1997", "1:15:56").
 
-music(1, "Fuel", "Hetfield, Ulrich, Hammett", "4:29").
-music(2, "The Memory Remains", "Hetfield, Ulrich", "4:39").
-music(3, "Devil's Dance", "Hetfield, Ulrich", "5:18").
-music(4, "The Unforgiven II", "Hetfield, Ulrich, Hammett", "6:36").
-music(5, "Better than You",  "Hetfield, Ulrich", "5:21").
-music(6, "Slither", "Hetfield, Ulrich, Hammett", "5:13").
-music(7, "Carpe Diem Baby", "Hetfield, Ulrich, Hammett", "6:12").
-music(8, "Bad Seed", "Hetfield, Ulrich, Hammett", "4:05").
-music(9, "Where The Wild Things Are", "Hetfield, Ulrich, Newsted", "6:52").
-music(10, "Prince Charming", "Hetfield, Ulrich", "6:04").
-music(11, "Low Man's Lyric", "Hetfield, Ulrich", "7:36").
-music(12, "Attitude", "Hetfield, Ulrich", "5:16").
-music(13, "Fixxxer", "Hetfield, Ulrich, Hammett", "8:14").
+music(1, "Fuel", "Reload", "Hetfield, Ulrich, Hammett", "4:29").
+music(2, "The Memory Remains", "Reload", "Hetfield, Ulrich", "4:39").
+music(3, "Devil's Dance", "Reload", "Hetfield, Ulrich", "5:18").
+music(4, "The Unforgiven II", "Reload", "Hetfield, Ulrich, Hammett", "6:36").
+music(5, "Better than You", "Reload", "Hetfield, Ulrich", "5:21").
+music(6, "Slither", "Reload", "Hetfield, Ulrich, Hammett", "5:13").
+music(7, "Carpe Diem Baby", "Reload", "Hetfield, Ulrich, Hammett", "6:12").
+music(8, "Bad Seed", "Reload", "Hetfield, Ulrich, Hammett", "4:05").
+music(9, "Where The Wild Things Are", "Reload", "Hetfield, Ulrich, Newsted", "6:52").
+music(10, "Prince Charming", "Reload", "Hetfield, Ulrich", "6:04").
+music(11, "Low Man's Lyric", "Reload", "Hetfield, Ulrich", "7:36").
+music(12, "Attitude", "Reload", "Hetfield, Ulrich", "5:16").
+music(13, "Fixxxer", "Reload", "Hetfield, Ulrich, Hammett", "8:14").
 
 % ST ANGER
 
 album(8, "St Anger", "eighth studio album", "2003", "75:04").
-music(1,"Frantic", "Hetfield, Ulrich, Hammett, Rock", "5:50").
-music(2,"St. Anger", "Hetfield, Ulrich, Hammett, Rock", "7:21").
-music(3,"Some Kind of Monster", "Hetfield, Ulrich, Hammett, Rock", "8:25").
-music(4,"Dirty Window", "Hetfield, Ulrich, Hammett, Rock", "5:25").
-music(5,"Invisible Kid", "Hetfield, Ulrich, Hammett, Rock",	"8:30").
-music(6,"My World", "Hetfield, Ulrich, Hammett, Rock", "5:46").
-music(7,"Shoot Me Again", "Hetfield, Ulrich, Hammett, Rock", "7:10").
-music(8,"Sweet Amber", "Hetfield, Ulrich, Hammett, Rock", "5:27").
-music(9,"The Unnamed Feeling", "Hetfield, Ulrich, Hammett, Rock", "7:08").
-music(10,"Purify", "Hetfield, Ulrich, Hammett, Rock", "5:14").
-music(11,"All Within My Hands", "Hetfield, Ulrich, Hammett, Rock", "8:48").
+music(1,"Frantic", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "5:50").
+music(2,"St. Anger", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "7:21").
+music(3,"Some Kind of Monster", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "8:25").
+music(4,"Dirty Window", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "5:25").
+music(5,"Invisible Kid", "St Anger", "Hetfield, Ulrich, Hammett, Rock",	"8:30").
+music(6,"My World", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "5:46").
+music(7,"Shoot Me Again", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "7:10").
+music(8,"Sweet Amber", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "5:27").
+music(9,"The Unnamed Feeling", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "7:08").
+music(10,"Purify", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "5:14").
+music(11,"All Within My Hands", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "8:48").
 
-# Death Magnetic, ninth studio album, 2008
+% DEATH MAGNETIC
 
-# All lyrics are written by James Hetfield; all music were composed by James Hetfield, Lars Ulrich, Kirk Hammett and Robert Trujillo.
+album(9, "Death Magnetic", "ninth studio album", "2008", "74:46").
+music(1, "That Was Just Your Life", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "7:08").
+music(2, "The End of the Line", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "7:52").
+music(3, "Broken, Beat & Scarred", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "6:25").
+music(4, "The Day That Never Comes", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "7:56").
+music(5, "All Nightmare Long", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "7:58").
+music(6, "Cyanide", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "6:40").
+music(7, "The Unforgiven III", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "7:47").
+music(8, "The Judas Kiss", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "8:01").
+music(9, "Suicide & Redemption", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "9:58").
+music(10, "My Apocalypse", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "5:01").
 
-# 1.	"That Was Just Your Life"	                                         7:08
-# 2.	"The End of the Line"	                                             7:52
-# 3.	"Broken, Beat & Scarred"	                                         6:25
-# 4.	"The Day That Never Comes"	                                         7:56
-# 5.	"All Nightmare Long"	                                             7:58
-# 6.	"Cyanide"	                                                         6:40
-# 7.	"The Unforgiven III"	                                             7:47
-# 8.	"The Judas Kiss"	                                                 8:01
-# 9.	"Suicide & Redemption" (instrumental)	                             9:58
-# 10.	"My Apocalypse"	5:01
-# Total length:	74:46
+% HARDWIRED... TO SELF-DESTRUCT 
 
-# ------------------------------------------------------------------------------
+album(10, "Hardwired to Self-Destruct", "tenth studio album", "2016", "77:42").
+music(1, "Atlas, Rise!", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "6:28").
+music(2, "Now That We're Dead", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "6:59").
+music(3, "Hardwired", "Hardwired to Self-Destruct", "Hetfield, Ulrich","3:09").
+music(4, "Moth into Flame", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "5:50").
+music(5, "Dream No More", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "6:29").
+music(6, "Halo on Fire", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "8:15").
+music(7, "Confusion", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "6:43").
+music(8, "ManUNkind", "Hardwired to Self-Destruct", "Hetfield, Ulrich, Trujillo", "6:55").
+music(9, "Here Comes Revenge", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "7:17").
+music(10, "Am I Savage?", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "6:30").    
+music(11, "Murder One", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "5:45").
+music(12, "Spit Out the Bone", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "7:09").
 
-# Hardwired... to Self-Destruct, tenth studio album, 2016
+% 72 SEASONS
 
-# All tracks are written by James Hetfield and Lars Ulrich, except "ManUNkind", written by Hetfield, Ulrich and Robert Trujillo.
-
-# Disc one
-# 1.	"Hardwired"	                                                          3:09
-# 2.	"Atlas, Rise!"	                                                      6:28
-# 3.	"Now That We're Dead"	                                              6:59
-# 4.	"Moth into Flame"	                                                  5:50
-# 5.	"Dream No More"	                                                      6:29
-# 6.	"Halo on Fire"              	                                      8:15
-# Disc two
-# 7.	"Confusion"	                                                          6:43
-# 8.	"ManUNkind"	                                                          6:55
-# 9.	"Here Comes Revenge"	                                              7:17
-# 10.	"Am I Savage?"	                                                      6:30    
-# 11.	"Murder One"	                                                      5:45
-# 12.	"Spit Out the Bone"	                                                  7:09
-# Total length:	77:42
-
-# ------------------------------------------------------------------------------
-
-# 72 seasons, eleventh studio album, 2023
-
-# 1.	"72 Seasons" 	            James HetfieldLars, UlrichKirk Hammett 	  7:39
-# 2.	"Shadows Follow"            Hetfield, Ulrich 	                      6:12
-# 3.	"Screaming Suicide"         Hetfield, Ulrich, Robert Trujillo	      5:30
-# 4.	"Sleepwalk My Life Away"    Hetfield, Ulrich, Trujillo	              6:56
-# 5.	"You Must Burn!"            Hetfield, Ulrich, Trujillo	              7:03
-# 6.	"Lux Æterna"                Hetfield, Ulrich	                      3:22
-# 7.	"Crown of Barbed Wire"      Hetfield, Ulrich, Hammett	              5:49
-# 8.	"Chasing Light"             Hetfield, Ulrich, Hammett	              6:45
-# 9.	"If Darkness Had a Son"     Hetfield, Ulrich, Hammett	              6:36
-# 10.	"Too Far Gone?"             Hetfield, Ulrich	                      4:34
-# 11.	"Room of Mirrors"           Hetfield, Ulrich	                      5:34
-# 12.	"Inamorata"                 Hetfield, Ulrich	                      11:10
-# Total length: 77:10
+album(11, "72 seasons", "eleventh studio album", "2023", "77:10").
+music(1, "72 Seasons", "72 Seasons", "Hetfield, Ulrich, Hammett", "7:39").
+music(2, "Shadows Follow", "72 Seasons", "Hetfield, Ulrich", "6:12").
+music(3, "Screaming Suicide", "72 Seasons", "Hetfield, Ulrich, Trujillo", "5:30").
+music(4, "Sleepwalk My Life Away", "72 Seasons", "Hetfield, Ulrich, Trujillo", "6:56").
+music(5, "You Must Burn!", "72 Seasons", "Hetfield, Ulrich, Trujillo", "7:03").
+music(6, "Lux AEterna", "72 Seasons", "Hetfield, Ulrich", "3:22").
+music(7, "Crown of Barbed Wire", "72 Seasons", "Hetfield, Ulrich, Hammett", "5:49").
+music(8, "Chasing Light", "72 Seasons", "Hetfield, Ulrich, Hammett", "6:45").
+music(9, "If Darkness Had a Son", "72 Seasons", "Hetfield, Ulrich, Hammett", "6:36").
+music(10, "Too Far Gone?", "72 Seasons", "Hetfield, Ulrich", "4:34").
+music(11, "Room of Mirrors", "72 Seasons", "Hetfield, Ulrich", "5:34").
+music(12, "Inamorata", "72 Seasons", "Hetfield, Ulrich", "11:10").
 
 
+% ideas
+
+% linha de bateria
+% ||  || guitarra
+% ||  || baixo
+% vocalista  
+% quem eh Dave Mustaine 
+% oque voce acha dos ultimos albuns do metalica 
+% opiniao sobre sobre todos os membro
+% adicionar idades dos integrantes
+% quais são todos os albuns
+% tamanho de todos os albuns
+% ano de todos os albuns
+% % % % quem sao os membros atuais
+% musicas instrumentais
