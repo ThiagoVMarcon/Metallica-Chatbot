@@ -4,11 +4,21 @@
 
 imp :- write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(X, Ascii_imp), read_split(X). % pega imput do usuario
 
-is_composed_response([X, "is pretty cool! Have you ever heard of", Y], R) :- adicionar_espaco([X, "is pretty cool! Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split2(Sla, 1, Y, R).
-is_composed_response([X, "is pretty bad... Have you ever heard of", Y], R) :- adicionar_espaco([X, "is pretty bad... Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split2(Sla, 1, Y, R).
-is_composed_response([X, "is great! My favorite song from the album is", Y], R) :- adicionar_espaco([X, "is great! My favorite song from the album is", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split2(Sla, 1, Y, R).
-is_composed_response([X, "is ok... I would rather listen to", Y, "though"], R) :- adicionar_espaco([X, "is ok... I would rather listen to", Y, "though"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split2(Sla, 1, Y, R).
+is_composed_response([X, "is pretty cool! Have you ever heard of", Y], R) :- adicionar_espaco([X, "is pretty cool! Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
+is_composed_response([X, "is pretty bad... Have you ever heard of", Y], R) :- adicionar_espaco([X, "is pretty bad... Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
+% is_composed_response([X, "is great! My favorite song from the album is", Y], R) :- adicionar_espaco([X, "is great! My favorite song from the album is", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
+% is_composed_response([X, "is ok... I would rather listen to", Y, "though"], R) :- adicionar_espaco([X, "is ok... I would rather listen to", Y, "though"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
+is_composed_response(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"], R) :- adicionar_espaco(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 2, [], R).
 is_composed_response(X,X).
+
+print_all_metallica_albums :- print_all_metallica_albums(1).
+
+
+print_all_metallica_albums(9).
+print_all_metallica_albums(X) :-  album(X,Y,_,_,_),write(Y),write("\n"),incr(X,X1),print_all_metallica_albums(X1).
+
+incr(X, X1) :-
+    X1 is X+1.
 
 title_case(String, TitleCase) :-
     atomic_list_concat(Words, ' ', String),
@@ -65,13 +75,16 @@ translate("ola", "tchau"):-!.
 translate("bem", "mal"):-!.
 translate(X, X). % catch-all clause for all words not to be translated
 
-
-
+throw_away_rest_besides_last([X], X).
+throw_away_rest_besides_last([_|X], R) :- throw_away_rest_besides_last(X, R).
 
 
 process_Pattern(["yes"|_], 1, X, ["Cool! I really love", X]).
-process_Pattern(["no"|_], 1, X, ["You should try it out! It's really good I swear"]). 
+process_Pattern(["no"|_], 1, _, ["You should try it out! It's really good I swear"]).
+process_Pattern([X|Y], 2, _ ,["Nice to meet you", R,"!"]) :- is_name_introduction(X), throw_away_rest_besides_last(Y,R).
+% process_Pattern([X|Y], 2, _ ,["Nice to meet you", X,"!"]) :- is_name_introduction(Y).
 process_Pattern(X,_,_,Y) :- process_Pattern(X,Y).
+process_Pattern([X], ["Hey!"]) :- is_greeting(X).
 process_Pattern(["are","you","called","cliff"], ["Yep!"]).
 process_Pattern(["is","your","name","cliff"], ["Yep!"]).
 process_Pattern([X, "cliff"],["Hey there!"]) :- is_greeting(X).
@@ -83,7 +96,7 @@ process_Pattern(["like",X|_],["Do you mean the album or the song? Either case I 
 process_Pattern(["like", "the", X|_],Y) :- compare_music2(X,X2),random_between(1,2,R), responses(R, X2, Y).
 process_Pattern(["like", X|_],Y) :- compare_music(X,X2),random_between(1,2,R), responses(R, X2, Y).
 process_Pattern(["like", X|_],Y) :- compare_album(X,X2),random_between(3,4,R), responses(R, X2, Y).
-process_Pattern(["what","is","your","name"|_], ["My name is Cliff, I'm a chatbot that really loves Metallica!"]).
+process_Pattern(["what","is","your","name"|_], ["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"]).
 process_Pattern(["what","year",_,"metallica"|_], ["Metallica was created in 1981, in Los Angeles."]).
 process_Pattern(["what","year",_,"the","band"|_], ["Metallica was formed in 1981, in Los Angeles."]).
 process_Pattern(["what","is","your","favorite","album"|_],["My favorite album is Master of Puppets but I really like", X, "too"]) :- random_between(1,2,A), album(A,X,_,_,_). % albus favoritos
@@ -104,9 +117,10 @@ process_Pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitar
 % oque voce acha dos ultimos albuns do metalica 
 % opiniao sobre sobre todos os membro
 % adicionar idades dos integrantes
-% quais são todos os albuns
-% tamanho de todos os albuns
-% ano de todos os albuns
+process_Pattern(["all","metallica","albums"|_],["\n"]) :- print_all_metallica_albums. % quais são todos os albuns
+process_Pattern(["what","is","the","length","of",X |_],[X2, "has a total length of", Y]) :- compare_album(X,X2), album(_, X2, _, _, Y).% tamanho de todos os albuns
+process_Pattern(["what","is","the","year","that",X |_],[X2, "was released in", Y]) :- compare_album(X,X2), album(_, X2, _, Y, _). % ano de todos os albuns
+process_Pattern(["what","year","was", X |_],[X2, "was released in", Y]) :- compare_album(X,X2), album(_, X2, _, Y, _).
 process_Pattern(["what","is","the","shortest","album"|_],["It","is","Ride The Lightning","which","has","Trapped Under Eyes","as","its","shortest","song"]). % album mais curto
 process_Pattern(["what","is","the","shortest","music"|_],["It","is","Motorbreath","which","is","the","third","song","from","Metallicas", "first","album!"]). % musica mais curta
 process_Pattern(["what","is","the","longest", "music"|_],["It","is","Inamorata","which","is","the","final","song","from","Metallicas", "latest","album!"]).% musicas mais longas
@@ -119,12 +133,9 @@ process_Pattern([],["Sorry","couldn't","quite","catch","you","man"]).
 
 read_split("stop") :- !.
 read_split(X) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out), imp. % transforma o input em uma lista de palavras separadas por espaços
+read_split(X, Num, Memory,Y) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out, Num, Memory,Y). % transforma o input em uma lista de palavras separadas por espaços
 
-read_split2("stop") :- !.
-read_split2(X, Num, Memory,Y) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp2(Out, Num, Memory,Y). % transforma o input em uma lista de palavras separadas por espaços
-
-temp2(Out, Num, Memory, Outers) :- process_Pattern(Out, Num, Memory, Outers).
-
+temp(Out, Num, Memory, Outers) :- process_Pattern(Out, Num, Memory, Outers).
 temp(X) :- process_Pattern(X,Y),is_composed_response(Y,Y2),adicionar_espaco(Y2,Z),atomics_to_string(Z, O), write(O),write("\n").
 
 teste :- write("pao").
