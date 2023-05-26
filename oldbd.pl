@@ -18,6 +18,17 @@ album_name("master").
 album_name("and").
 album_name("st").
 
+is_name_introduction(X) :-
+    name_introduction(X).
+
+name_introduction("i").
+name_introduction("im").
+name_introduction("my").
+name_introduction("people").
+name_introduction("is").
+% name_introduction(["is","what","people","call","me"]).
+% name_introduction(["is","what","people","like","to","call","me"]).
+name_introduction([]).
 
 % esta_no_dicionario(X).
 
@@ -69,7 +80,7 @@ music(6, "Leper Messiah", "Master of Puppets", "Hetfield, Ulrich", "5:40").
 music(7, "Orion", "Master of Puppets", "Burton, Hetfield, Ulrich", "8:28").
 music(8, "Damage, Inc.", "Master of Puppets", "Hetfield, Ulrich, Burton, Hammett", "5:29").
 
-$ ...AND JUSTICE FOR ALL
+% ...AND JUSTICE FOR ALL
 
 album(4, "And Justice For All", "fourth album", "1988", "65:33").
 music(1, "Blackened", "And Justice For All", "Hetfield, Ulrich, Newsted", "6:41").
@@ -204,6 +215,5 @@ music(11,"All Within My Hands", "Hetfield, Ulrich, Hammett, Rock", "8:48").
 # 11.	"Room of Mirrors"           Hetfield, Ulrich	                      5:34
 # 12.	"Inamorata"                 Hetfield, Ulrich	                      11:10
 # Total length: 77:10
-
 
 
