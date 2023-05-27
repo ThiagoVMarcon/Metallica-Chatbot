@@ -3,14 +3,14 @@
 
 % ARTISTS
 
-artist("James Hetfield", "59", "vocalist/rhythm guitarist", "current").
-artist("Lars Ulrich", "59", "drummer", "current").
-artist("Kirk Hammett", "60", "lead guitarist", "current").
-artist("Robert Trujillo", "58", "bassist", "current").
-artist("Dave Mustaine", "61", "lead guitarist", "ex").
-artist("Ron McGovney", "59", "bassist", "ex").
-artist("Cliff Burton", "24", "bassist", "ex").
-artist("Jason Newsted", "60", "bassist", "ex").
+artist("James Hetfield", "59", "vocalist/rhythm guitarist").
+artist("Lars Ulrich", "59", "drummer").
+artist("Kirk Hammett", "60", "lead guitarist").
+artist("Robert Trujillo", "58", "bassist").
+artist("Dave Mustaine", "61", "lead guitarist").
+artist("Ron McGovney", "59", "bassist").
+artist("Cliff Burton", "24", "bassist").
+artist("Jason Newsted", "60", "bassist").
 
 % ALBUMS     
 
