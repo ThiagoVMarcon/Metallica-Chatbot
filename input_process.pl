@@ -9,8 +9,6 @@ imp :- write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(X,
 
 is_composed_response([X, "is pretty cool! Have you ever heard of", Y], R) :- write("Cliff: "), adicionar_espaco([X, "is pretty cool! Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
 is_composed_response([X, "is pretty bad... Have you ever heard of", Y], R) :- write("Cliff: "), adicionar_espaco([X, "is pretty bad... Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
-% is_composed_response([X, "is great! My favorite song from the album is", Y], R) :- write("Cliff: "), adicionar_espaco([X, "is great! My favorite song from the album is", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
-% is_composed_response([X, "is ok... I would rather listen to", Y, "though"], R) :- write("Cliff: "), adicionar_espaco([X, "is ok... I would rather listen to", Y, "though"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
 is_composed_response(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"], R) :- write("Cliff: "), adicionar_espaco(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 2, [], R).
 is_composed_response(X,X).
 
@@ -86,7 +84,6 @@ throw_away_rest_besides_last([_|X], R) :- throw_away_rest_besides_last(X, R).
 process_Pattern(["yes"|_], 1, X, ["Cool! I really love", X]).
 process_Pattern(["no"|_], 1, _, ["You should try it out! It's really good I swear"]).
 process_Pattern([X|Y], 2, _ ,["Nice to meet you", R,"!"]) :- is_name_introduction(X), throw_away_rest_besides_last(Y,R).
-% process_Pattern([X|Y], 2, _ ,["Nice to meet you", X,"!"]) :- is_name_introduction(Y).
 process_Pattern(X,_,_,Y) :- process_Pattern(X,Y).
 process_Pattern([X], ["Hey!"]) :- is_greeting(X).
 process_Pattern(["are","you","called","cliff"], ["Yep!"]).
@@ -128,10 +125,12 @@ process_Pattern([],["Sorry","couldn't","quite","catch","you","man"]).
 process_Pattern([_|Resto],Y) :- process_Pattern(Resto,Y).
 
 read_split("stop") :- !.
-read_split("stop") :- !.
+read_split("bye") :- !.
+read_split("adeus") :- !.
 read_split(X) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out), imp. % transforma o input em uma lista de palavras separadas por espaços
 readsplit("stop",_,_,_) :- !.
 readsplit("bye",_,_,_) :- !.
+readsplit("adeus",_,_,_) :- !.
 read_split(X, Num, Memory,Y) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out, Num, Memory,Y). % transforma o input em uma lista de palavras separadas por espaços
 
 temp(Out, Num, Memory, Outers) :- process_Pattern(Out, Num, Memory, Outers).
