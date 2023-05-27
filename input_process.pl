@@ -11,9 +11,11 @@ is_composed_response([X, "is pretty bad... Have you ever heard of", Y], R) :- ad
 is_composed_response(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"], R) :- adicionar_espaco(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 2, [], R).
 is_composed_response(X,X).
 
+get_age(X,A) :- artist(X,A,_).
+
+compare_artist(X,Y) :- artist(Y,_,_),split_string(Y, "\s", "\s", [Yn|_]) ,string_lower(Yn, Y2), Y2 == X.
+
 print_all_metallica_albums :- print_all_metallica_albums(1).
-
-
 print_all_metallica_albums(12).
 print_all_metallica_albums(X) :-  album(X,Y,_,_,_),write(Y),write("\n"),incr(X,X1),print_all_metallica_albums(X1).
 
@@ -116,7 +118,7 @@ process_Pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitar
 % quem eh Dave Mustaine 
 % oque voce acha dos ultimos albuns do metalica 
 % opiniao sobre sobre todos os membro
-% adicionar idades dos integrantes
+process_Pattern(["what","is","age","of",X|_], [Y, "has the age of", A]). :- compare_artist(X,Y), get_age(Y,A).  % adicionar idades dos integrantes
 process_Pattern(["all","metallica","albums"|_],["\n"]) :- print_all_metallica_albums. % quais são todos os albuns
 process_Pattern(["what","is","the","length","of",X |_],[X2, "has a total length of", Y]) :- compare_album(X,X2), album(_, X2, _, _, Y).% tamanho de todos os albuns
 process_Pattern(["what","is","the","year","that",X |_],[X2, "was released in", Y]) :- compare_album(X,X2), album(_, X2, _, Y, _). % ano de todos os albuns
