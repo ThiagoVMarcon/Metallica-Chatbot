@@ -4,6 +4,8 @@
 :- initialization(main).
 
 
+
+
 main :- write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(X, Ascii_imp), read_split(X). % pega imput do usuario
 imp :- write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(X, Ascii_imp), read_split(X). % pega imput do usuario
 
