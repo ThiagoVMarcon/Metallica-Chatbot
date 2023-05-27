@@ -1,52 +1,20 @@
-% DATABASE OF RESPONSES
-
-is_greeting(X) :- 
-    greeting(X).
-greeting("hey").
-greeting("ola").
-greeting("oi").
-greeting("hello").
-greeting("heya").
-greeting("sup").
-greeting("hi").
-
-is_same_name_of_album(X) :-
-    album_name(X).
-album_name("kill").
-album_name("ride").
-album_name("master").
-album_name("and").
-album_name("st").
-
-is_name_introduction(X) :-
-    name_introduction(X).
-
-name_introduction("i").
-name_introduction("im").
-name_introduction("my").
-name_introduction("people").
-name_introduction("is").
-% name_introduction(["is","what","people","call","me"]).
-% name_introduction(["is","what","people","like","to","call","me"]).
-name_introduction([]).
-
-% esta_no_dicionario(X).
-
-responses(1, X, [X, "is pretty cool! Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
-responses(2, X, [X, "is pretty bad... Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
-responses(3, X, [X, "is great! My favorite song from the album is", Y]) :- random_between(1,8,R), music(R,Y,X,_,_).
-responses(4, X, [X, "is ok... I would rather listen to", Y, "though"]) :- random_between(1,8,R), album(R,Y,_,_,_).
+:- discontiguous album/5.
+:- discontiguous music/5.
 
 % ARTISTS
 
-artist("James Hetfield", "59", "vocalist/rhythm guitarist").
-artist("Lars Ulrich", "59", "drummer").
-artist("Kirk Hammett", "60", "lead guitarist").
-artist("Robert Trujillo", "58", "bassist").
+artist("James Hetfield", "59", "vocalist/rhythm guitarist", "current").
+artist("Lars Ulrich", "59", "drummer", "current").
+artist("Kirk Hammett", "60", "lead guitarist", "current").
+artist("Robert Trujillo", "58", "bassist", "current").
+artist("Dave Mustaine", "61", "lead guitarist", "ex").
+artist("Ron McGovney", "59", "bassist", "ex").
+artist("Cliff Burton", "24", "bassist", "ex").
+artist("Jason Newsted", "60", "bassist", "ex").
 
-% ALBUMS: 
+% ALBUMS     
 
-% KILL EM ALL
+% Kill em All
 
 album(1, "Kill Em All", "first studio album", "1983", "51:20").
 music(1, "Hit the Lights", "Kill 'Em All", "Hetfield, Ulrich", "4:15").
@@ -60,7 +28,7 @@ music(8, "No Remorse", "Kill 'Em All", "Hetfield, Ulrich", "6:26").
 music(9, "Seek & Destroy", "Kill 'Em All", "Hetfield, Ulrich", "6:54").
 music(10, "Metal Militia", "Kill 'Em All", "Hetfield, Ulrich, Mustaine", "5:11").
 
-% RIDE THE LIGHTNING
+% Ride the Lightning
 
 album(2, "Ride the Lightning", "second studio album", "1984", "47:25").
 music(1, "Fight Fire with Fire", "Ride the Lightning", "Hetfield, Ulrich, Burton", "4:44").
@@ -72,7 +40,7 @@ music(6, "Escape", "Ride the Lightning", "Hetfield, Ulrich, Hammett", "4:24").
 music(7, "Creeping Death", "Ride the Lightning", "Hetfield, Ulrich, Burton, Hammett", "6:36").
 music(8, "The Call of Ktulu", "Ride the Lightning", "Hetfield, Ulrich, Burton, Mustaine", "8:53").
 
-% MASTER OF PUPPETS
+% Master of Puppets
 
 album(3, "Master of Puppets", "third album", "1986", "54:47").
 music(1, "Battery", "Master of Puppets", "Hetfield, Ulrich", "5:12").
@@ -84,7 +52,7 @@ music(6, "Leper Messiah", "Master of Puppets", "Hetfield, Ulrich", "5:40").
 music(7, "Orion", "Master of Puppets", "Burton, Hetfield, Ulrich", "8:28").
 music(8, "Damage, Inc.", "Master of Puppets", "Hetfield, Ulrich, Burton, Hammett", "5:29").
 
-% ...AND JUSTICE FOR ALL
+% ...And Justice For All
 
 album(4, "And Justice For All", "fourth album", "1988", "65:33").
 music(1, "Blackened", "And Justice For All", "Hetfield, Ulrich, Newsted", "6:41").
@@ -97,7 +65,7 @@ music(7, "The Frayed Ends of Sanity", "And Justice For All", "Hetfield, Ulrich, 
 music(8, "To Live Is to Die", "And Justice For All", "Hetfield, Ulrich, Burton", "9:49").  
 music(9, "Dyers Eve", "And Justice For All", "Hetfield, Ulrich, Hammett", "5:13").		
 
-% METALLICA (THE BLACK ALBUM)
+% Metallica (The Black Album)
 
 album(5, "Metallica", "fifth studio album", "1991", "62:31").
 music(1, "Enter Sandman", "Metallica", "Hetfield, Ulrich, Hammett", "5:31").
@@ -113,7 +81,7 @@ music(10, "The God That Failed", "Metallica", "Hetfield, Ulrich", "5:05").
 music(11, "My Friend of Misery", "Metallica", "Newsted, Hetfield, Ulrich", "6:50").
 music(12, "The Struggle Within", "Metallica", "Hetfield, Ulrich", "3:54").
 
-% LOAD
+% Load
 
 album(6, "Load", "sixth studio album", "1996", "1:17:56").
 music(1, "Ain't My Bitch", "Load", "Hetfield, Ulrich", "5:04").
@@ -131,10 +99,9 @@ music(1, "Thorn Within", "Load", "Hetfield, Ulrich, Hammet", "5:51").
 music(1, "Ronnie", "Load", "Hetfield, Ulrich", "5:17").
 music(1, "The Outlaw Torn", "Load",  "Hetfield, Ulrich", "9:52").
 
-% RELOAD
+% ReLoad
 
 album(7, "Reload", "seventh album", "1997", "1:15:56").
-
 music(1, "Fuel", "Reload", "Hetfield, Ulrich, Hammett", "4:29").
 music(2, "The Memory Remains", "Reload", "Hetfield, Ulrich", "4:39").
 music(3, "Devil's Dance", "Reload", "Hetfield, Ulrich", "5:18").
@@ -149,7 +116,7 @@ music(11, "Low Man's Lyric", "Reload", "Hetfield, Ulrich", "7:36").
 music(12, "Attitude", "Reload", "Hetfield, Ulrich", "5:16").
 music(13, "Fixxxer", "Reload", "Hetfield, Ulrich, Hammett", "8:14").
 
-% ST ANGER
+% St Anger
 
 album(8, "St Anger", "eighth studio album", "2003", "75:04").
 music(1,"Frantic", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "5:50").
@@ -164,7 +131,7 @@ music(9,"The Unnamed Feeling", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "7
 music(10,"Purify", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "5:14").
 music(11,"All Within My Hands", "St Anger", "Hetfield, Ulrich, Hammett, Rock", "8:48").
 
-% DEATH MAGNETIC
+% Death Magnetic
 
 album(9, "Death Magnetic", "ninth studio album", "2008", "74:46").
 music(1, "That Was Just Your Life", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "7:08").
@@ -178,7 +145,7 @@ music(8, "The Judas Kiss", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujill
 music(9, "Suicide & Redemption", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "9:58").
 music(10, "My Apocalypse", "Death Magnetic", "Hetfield, Ulrich, Hammett, Trujillo", "5:01").
 
-% HARDWIRED... TO SELF-DESTRUCT 
+% Hardwired... To Self-Destruct 
 
 album(10, "Hardwired to Self-Destruct", "tenth studio album", "2016", "77:42").
 music(1, "Atlas, Rise!", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "6:28").
@@ -194,9 +161,9 @@ music(10, "Am I Savage?", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "6:3
 music(11, "Murder One", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "5:45").
 music(12, "Spit Out the Bone", "Hardwired to Self-Destruct", "Hetfield, Ulrich", "7:09").
 
-% 72 SEASONS
+% 72 Seasons
 
-album(11, "72 seasons", "eleventh studio album", "2023", "77:10").
+album(11, "72 Seasons", "eleventh studio album", "2023", "77:10").
 music(1, "72 Seasons", "72 Seasons", "Hetfield, Ulrich, Hammett", "7:39").
 music(2, "Shadows Follow", "72 Seasons", "Hetfield, Ulrich", "6:12").
 music(3, "Screaming Suicide", "72 Seasons", "Hetfield, Ulrich, Trujillo", "5:30").
@@ -213,17 +180,6 @@ music(12, "Inamorata", "72 Seasons", "Hetfield, Ulrich", "11:10").
 
 % ideas
 
-% linha de bateria
-% ||  || guitarra
-% ||  || baixo
-% vocalista  
-% quem eh Dave Mustaine 
 % oque voce acha dos ultimos albuns do metalica 
 % opiniao sobre sobre todos os membro
-% adicionar idades dos integrantes
-% quais são todos os albuns
-% tamanho de todos os albuns
-% ano de todos os albuns
-% % % % quem sao os membros atuais
 % musicas instrumentais
-% cliff, dave e jason

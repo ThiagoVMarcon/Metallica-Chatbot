@@ -103,22 +103,14 @@ process_Pattern(["what","year",_,"metallica"|_], ["Metallica was created in 1981
 process_Pattern(["what","year",_,"the","band"|_], ["Metallica was formed in 1981, in Los Angeles."]).
 process_Pattern(["what","is","your","favorite","album"|_],["My favorite album is Master of Puppets but I really like", X, "too"]) :- random_between(1,2,A), album(A,X,_,_,_). % albus favoritos
 process_Pattern(["what","is","your","favorite", "music"|_], ["My favorite music is Fade to Black but I really like", X , "aswell"]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,X,A,_,_).
-process_Pattern(["how","many", "albums"|_], ["Metallica has released a total of 11 studio albums.","\n", "foi"]). % quantos albuns
+process_Pattern(["how","many", "albums"|_], ["Metallica has released a total of 11 studio albums."]). % quantos albuns
 process_Pattern(["what","year","is",X|_], [Y,"is","from",Z,"!"]) :- compare_album(X,Y), album(_,Y,_,Z,_).% ano de lançamentos do album
-% % % % quem sao os membros atuais
 process_Pattern(["who","is", "the", "vocalist"|_], ["James Hetfield is the current and only vocalist that Metallica has ever had."]). % vocalista
 process_Pattern(["who","is", "the", "drummer"|_], ["Lars Ulrich is the current and only drummer that Metallica has ever had."]). % baterista
 process_Pattern(["who","is", "the", "bassist"|_], ["Robert Trujillo is the current bassist of Metallica."]). % baixista
 process_Pattern(["who","is", "the", "guitarist"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
 process_Pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
-% linha de bateria
-% ||  || guitarra
-% ||  || baixo
-% vocalista  
-% quem eh Dave Mustaine 
-% oque voce acha dos ultimos albuns do metalica 
-% opiniao sobre sobre todos os membro
-process_Pattern(["what","is","age","of",X|_], [Y, "has the age of", A]). :- compare_artist(X,Y), get_age(Y,A).  % adicionar idades dos integrantes
+process_Pattern(["age","of",X|_], [Y, "is", A, "years old."]) :- compare_artist(X,Y), get_age(Y,A).  % adicionar idades dos integrantes
 process_Pattern(["all","metallica","albums"|_],["\n"]) :- print_all_metallica_albums. % quais são todos os albuns
 process_Pattern(["what","is","the","length","of",X |_],[X2, "has a total length of", Y]) :- compare_album(X,X2), album(_, X2, _, _, Y).% tamanho de todos os albuns
 process_Pattern(["what","is","the","year","that",X |_],[X2, "was released in", Y]) :- compare_album(X,X2), album(_, X2, _, Y, _). % ano de todos os albuns
@@ -127,7 +119,7 @@ process_Pattern(["what","is","the","shortest","album"|_],["It","is","Ride The Li
 process_Pattern(["what","is","the","shortest","music"|_],["It","is","Motorbreath","which","is","the","third","song","from","Metallicas", "first","album!"]). % musica mais curta
 process_Pattern(["what","is","the","longest", "music"|_],["It","is","Inamorata","which","is","the","final","song","from","Metallicas", "latest","album!"]).% musicas mais longas
 process_Pattern(["what","is","the","longest","album"|_],["It","is","Load","which","has","The Outlaw Torn","as","its","longest","song"]).% albuns mais longos
-% musicas instrumentais
+process_Pattern(["what","is","the","longest","album"|_],["It","is","Load","which","has","The Outlaw Torn","as","its","longest","song"]).% albuns mais longos
 process_Pattern(["what","do","you","think","about","metallica", "after","black"|_],["Metallica created a whole genre of music, Thrash Metal, and then walked away from it in 1990 because of greed. Some ppl say to me get over it blah blah blah but music to me is after family and friends. I loath anyone who turns their back on a legion of fans and a genre of music and walk away because of greed. They were not poor when they released the black album, they were just greedy. Sad."]). % voce acha que o metalica se vendeu no black album, oque voce acha do black album
 
 process_Pattern([_|Resto],Y) :- process_Pattern(Resto,Y).
@@ -144,3 +136,36 @@ teste :- write("pao").
 
 testers :- split_string(" computer consists of hardware ", "\s", "\s", L), flatten(L,L2),write(L2).
 
+
+is_greeting(X) :- greeting(X).
+greeting("hey").
+greeting("ola").
+greeting("oi").
+greeting("hello").
+greeting("heya").
+greeting("sup").
+greeting("hi").
+
+is_same_name_of_album(X) :- album_name(X).
+album_name("kill").
+album_name("ride").
+album_name("master").
+album_name("and").
+album_name("st").
+
+is_name_introduction(X) :- name_introduction(X).
+name_introduction("i").
+name_introduction("im").
+name_introduction("my").
+name_introduction("people").
+name_introduction("is").
+% name_introduction(["is","what","people","call","me"]).
+% name_introduction(["is","what","people","like","to","call","me"]).
+name_introduction([]).
+
+% esta_no_dicionario(X).
+
+responses(1, X, [X, "is pretty cool! Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
+responses(2, X, [X, "is pretty bad... Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
+responses(3, X, [X, "is great! My favorite song from the album is", Y]) :- random_between(1,8,R), music(R,Y,X,_,_).
+responses(4, X, [X, "is ok... I would rather listen to", Y, "though"]) :- random_between(1,8,R), album(R,Y,_,_,_).
