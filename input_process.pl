@@ -1,14 +1,17 @@
 :- [db].
 :- use_module(library(random)).
 :- use_module(library(strings)).
+:- initialization(main).
 
-imp :- write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(X, Ascii_imp), read_split(X). % pega imput do usuario
 
-is_composed_response([X, "is pretty cool! Have you ever heard of", Y], R) :- adicionar_espaco([X, "is pretty cool! Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
-is_composed_response([X, "is pretty bad... Have you ever heard of", Y], R) :- adicionar_espaco([X, "is pretty bad... Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
-% is_composed_response([X, "is great! My favorite song from the album is", Y], R) :- adicionar_espaco([X, "is great! My favorite song from the album is", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
-% is_composed_response([X, "is ok... I would rather listen to", Y, "though"], R) :- adicionar_espaco([X, "is ok... I would rather listen to", Y, "though"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
-is_composed_response(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"], R) :- adicionar_espaco(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("Write your message: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 2, [], R).
+main :- write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(X, Ascii_imp), read_split(X). % pega imput do usuario
+imp :- write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(X, Ascii_imp), read_split(X). % pega imput do usuario
+
+is_composed_response([X, "is pretty cool! Have you ever heard of", Y], R) :- write("Cliff: "), adicionar_espaco([X, "is pretty cool! Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
+is_composed_response([X, "is pretty bad... Have you ever heard of", Y], R) :- write("Cliff: "), adicionar_espaco([X, "is pretty bad... Have you ever heard of", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
+% is_composed_response([X, "is great! My favorite song from the album is", Y], R) :- write("Cliff: "), adicionar_espaco([X, "is great! My favorite song from the album is", Y],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
+% is_composed_response([X, "is ok... I would rather listen to", Y, "though"], R) :- write("Cliff: "), adicionar_espaco([X, "is ok... I would rather listen to", Y, "though"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 1, Y, R).
+is_composed_response(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"], R) :- write("Cliff: "), adicionar_espaco(["My name is Cliff, I'm a chatbot that really loves Metallica! How about you, what's your name?"],Z),atomics_to_string(Z, O), write(O),write("\n"), write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(Sla, Ascii_imp), read_split(Sla, 2, [], R).
 is_composed_response(X,X).
 
 get_age(X,A) :- artist(X,A,_).
@@ -112,6 +115,7 @@ process_Pattern(["who","is", "the", "guitarist"|_], ["Metallica has two guitaris
 process_Pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
 process_Pattern(["age","of",X|_], [Y, "is", A, "years old."]) :- compare_artist(X,Y), get_age(Y,A).  % adicionar idades dos integrantes
 process_Pattern(["all","metallica","albums"|_],["\n"]) :- print_all_metallica_albums. % quais são todos os albuns
+
 process_Pattern(["what","is","the","length","of",X |_],[X2, "has a total length of", Y]) :- compare_album(X,X2), album(_, X2, _, _, Y).% tamanho de todos os albuns
 process_Pattern(["what","is","the","year","that",X |_],[X2, "was released in", Y]) :- compare_album(X,X2), album(_, X2, _, Y, _). % ano de todos os albuns
 process_Pattern(["what","year","was", X |_],[X2, "was released in", Y]) :- compare_album(X,X2), album(_, X2, _, Y, _).
@@ -130,7 +134,7 @@ read_split(X) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL
 read_split(X, Num, Memory,Y) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out, Num, Memory,Y). % transforma o input em uma lista de palavras separadas por espaços
 
 temp(Out, Num, Memory, Outers) :- process_Pattern(Out, Num, Memory, Outers).
-temp(X) :- process_Pattern(X,Y),is_composed_response(Y,Y2),adicionar_espaco(Y2,Z),atomics_to_string(Z, O), write(O),write("\n").
+temp(X) :- process_Pattern(X,Y),is_composed_response(Y,Y2),adicionar_espaco(Y2,Z),atomics_to_string(Z, O), write("Cliff: "), write(O), write("\n").
 
 teste :- write("pao").
 
