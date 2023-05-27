@@ -115,11 +115,11 @@ process_Pattern(["who","is", "the", "guitarist"|_], ["Metallica has two guitaris
 process_Pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
 process_Pattern(["age","of",X|_], [Y, "is", A, "years old."]) :- compare_artist(X,Y), get_age(Y,A).  % adicionar idades dos integrantes
 process_Pattern(["all","metallica","albums"|_],["\n"]) :- print_all_metallica_albums. % quais são todos os albuns
-
+process_Pattern(["instrumental","songs"|_],  ["Metallica has five instrumental songs. (Anesthesia) - Pulling Teeth, The Call of Ktulu, Orion, To Live Is To Die and Suicide & Redemption."]). 
 process_Pattern(["what","is","the","length","of",X |_],[X2, "has a total length of", Y]) :- compare_album(X,X2), album(_, X2, _, _, Y).% tamanho de todos os albuns
 process_Pattern(["what","is","the","year","that",X |_],[X2, "was released in", Y]) :- compare_album(X,X2), album(_, X2, _, Y, _). % ano de todos os albuns
 process_Pattern(["what","year","was", X |_],[X2, "was released in", Y]) :- compare_album(X,X2), album(_, X2, _, Y, _).
-process_Pattern(["what","is","the","shortest","album"|_],["It","is","Ride The Lightning","which","has","Trapped Under Eyes","as","its","shortest","song"]). % album mais curto
+process_Pattern(["what","is","the","shortest","album"|_],["It","is","Ride The Lightning","which","has","Trapped Under Eyes","as","its","shortest","song!"]). % album mais curto
 process_Pattern(["what","is","the","shortest","music"|_],["It","is","Motorbreath","which","is","the","third","song","from","Metallicas", "first","album!"]). % musica mais curta
 process_Pattern(["what","is","the","longest", "music"|_],["It","is","Inamorata","which","is","the","final","song","from","Metallicas", "latest","album!"]).% musicas mais longas
 process_Pattern(["what","is","the","longest","album"|_],["It","is","Load","which","has","The Outlaw Torn","as","its","longest","song"]).% albuns mais longos
@@ -132,8 +132,8 @@ process_Pattern([],["Sorry","couldn't","quite","catch","you","man"]).
 read_split("stop") :- !.
 read_split("stop") :- !.
 read_split(X) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out), imp. % transforma o input em uma lista de palavras separadas por espaços
-read_split("stop",_,_,_) :- !
-read_split("bye",_,_,_) :- !
+readsplit("stop",_,_,_) :- !
+readsplit("bye",_,_,_) :- !
 read_split(X, Num, Memory,Y) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out, Num, Memory,Y). % transforma o input em uma lista de palavras separadas por espaços
 
 temp(Out, Num, Memory, Outers) :- process_Pattern(Out, Num, Memory, Outers).
