@@ -83,7 +83,6 @@ translate(X, X). % catch-all clause for all words not to be translated
 throw_away_rest_besides_last([X], X).
 throw_away_rest_besides_last([_|X], R) :- throw_away_rest_besides_last(X, R).
 
-
 process_Pattern(["yes"|_], 1, X, ["Cool! I really love", X]).
 process_Pattern(["no"|_], 1, _, ["You should try it out! It's really good I swear"]).
 process_Pattern([X|Y], 2, _ ,["Nice to meet you", R,"!"]) :- is_name_introduction(X), throw_away_rest_besides_last(Y,R).
@@ -125,24 +124,18 @@ process_Pattern(["what","is","the","longest", "music"|_],["It","is","Inamorata",
 process_Pattern(["what","is","the","longest","album"|_],["It","is","Load","which","has","The Outlaw Torn","as","its","longest","song"]).% albuns mais longos
 process_Pattern(["what","is","the","longest","album"|_],["It","is","Load","which","has","The Outlaw Torn","as","its","longest","song"]).% albuns mais longos
 process_Pattern(["what","do","you","think","about","metallica", "after","black"|_],["Metallica created a whole genre of music, Thrash Metal, and then walked away from it in 1990 because of greed. Some ppl say to me get over it blah blah blah but music to me is after family and friends. I loath anyone who turns their back on a legion of fans and a genre of music and walk away because of greed. They were not poor when they released the black album, they were just greedy. Sad."]). % voce acha que o metalica se vendeu no black album, oque voce acha do black album
-
-process_Pattern([_|Resto],Y) :- process_Pattern(Resto,Y).
 process_Pattern([],["Sorry","couldn't","quite","catch","you","man"]).
+process_Pattern([_|Resto],Y) :- process_Pattern(Resto,Y).
 
 read_split("stop") :- !.
 read_split("stop") :- !.
 read_split(X) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out), imp. % transforma o input em uma lista de palavras separadas por espaços
-readsplit("stop",_,_,_) :- !
-readsplit("bye",_,_,_) :- !
+readsplit("stop",_,_,_) :- !.
+readsplit("bye",_,_,_) :- !.
 read_split(X, Num, Memory,Y) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out, Num, Memory,Y). % transforma o input em uma lista de palavras separadas por espaços
 
 temp(Out, Num, Memory, Outers) :- process_Pattern(Out, Num, Memory, Outers).
 temp(X) :- process_Pattern(X,Y),is_composed_response(Y,Y2),adicionar_espaco(Y2,Z),atomics_to_string(Z, O), write("Cliff: "), write(O), write("\n").
-
-teste :- write("pao").
-
-testers :- split_string(" computer consists of hardware ", "\s", "\s", L), flatten(L,L2),write(L2).
-
 
 is_greeting(X) :- greeting(X).
 greeting("hey").
@@ -169,8 +162,6 @@ name_introduction("is").
 % name_introduction(["is","what","people","call","me"]).
 % name_introduction(["is","what","people","like","to","call","me"]).
 name_introduction([]).
-
-% esta_no_dicionario(X).
 
 responses(1, X, [X, "is pretty cool! Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
 responses(2, X, [X, "is pretty bad... Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
