@@ -177,9 +177,3 @@ music(10, "Too Far Gone?", "72 Seasons", "Hetfield, Ulrich", "4:34").
 music(11, "Room of Mirrors", "72 Seasons", "Hetfield, Ulrich", "5:34").
 music(12, "Inamorata", "72 Seasons", "Hetfield, Ulrich", "11:10").
 
-
-% ideas
-
-% oque voce acha dos ultimos albuns do metalica 
-% opiniao sobre sobre todos os membro
-% musicas instrumentais
