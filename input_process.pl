@@ -130,7 +130,10 @@ process_Pattern([_|Resto],Y) :- process_Pattern(Resto,Y).
 process_Pattern([],["Sorry","couldn't","quite","catch","you","man"]).
 
 read_split("stop") :- !.
+read_split("stop") :- !.
 read_split(X) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out), imp. % transforma o input em uma lista de palavras separadas por espaços
+read_split("stop",_,_,_) :- !
+read_split("bye",_,_,_) :- !
 read_split(X, Num, Memory,Y) :- remover_caracteres_especiais(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out, Num, Memory,Y). % transforma o input em uma lista de palavras separadas por espaços
 
 temp(Out, Num, Memory, Outers) :- process_Pattern(Out, Num, Memory, Outers).
