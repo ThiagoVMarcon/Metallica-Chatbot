@@ -1,66 +1,48 @@
-% DATABASE
+% DATABASE OF RESPONSES
 
-% auxiliar functions
-
-is_greeting(X) :- greeting(X).
-greeting("hi").
-greeting("hello").
+is_greeting(X) :- 
+    greeting(X).
 greeting("hey").
+greeting("ola").
+greeting("oi").
+greeting("hello").
 greeting("heya").
 greeting("sup").
-greeting("yo").
+greeting("hi").
 
-% esta_no_dicionario(X).
-
-responses(1, X, [X, "is pretty cool! Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
-responses(2, X, [X, "is pretty bad... Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
-responses(3, X, [X, "is great! My favorite song from the album is", Y]) :- random_between(1,8,R), music(R,Y,X,_,_).
-responses(4, X, [X, "is ok... I would rather listen to", Y, "though"]) :- random_between(1,8,R), album(R,Y,_,_,_).
-
-
-% patterns
-
-process_pattern(["are","you","called","cliff?"], ["Yep!"]).
-process_pattern(["is","your","name","cliff?"], ["Yep!"]).
-process_pattern([X, "cliff"],["Hey there!"]) :- is_greeting(X).
-process_pattern([X|_],["Hey there!"]) :- is_greeting(X).
-process_pattern(["i'm", X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
-process_pattern(["i'm","called",X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
-process_pattern(["i","am", X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
-process_pattern(["i","am","called",X, "what","is","your","name"|_],["Hey", X, "My name is Cliff, I'm a chatbot that really loves Metallica!"]).
-process_pattern(["like",X|_],["Do you mean the album or the song? Either case I think they are both pretty great!"]) :- same_name_album_song(X).
-process_pattern(["like", "the", X|_],Y) :- compare_music2(X,X2),random_between(1,2,R), responses(R, X2, Y).
-process_pattern(["like", X|_],Y) :- compare_music(X,X2),random_between(1,2,R), responses(R, X2, Y).
-process_pattern(["like", X|_],Y) :- compare_album(X,X2),random_between(3,4,R), responses(R, X2, Y).
-process_pattern(["what","is","your","name"|_], ["My name is Cliff, I'm a chatbot that really loves Metallica!"]).
-process_pattern(["what","year",_,"metallica"|_], ["Metallica was created in 1981, in Los Angeles."]).
-process_pattern(["what","year",_,"the","band"|_], ["Metallica was formed in 1981, in Los Angeles."]).
-process_pattern(["what","is","your","favorite","album"|_],["My favorite album is Master of Puppets but I really like", X, "too"]) :- random_between(1,2,A), album(A,X,_,_,_). % albus favoritos
-process_pattern(["what","is","your","favorite", "music"|_], ["My favorite music is Fade to Black but I really like", X , "aswell"]) :- random_between(1,5,R1),random_between(1,7,R2),album(R1,A,_,_,_),music(R2,X,A,_,_).
-process_pattern(["how","many", "albums"|_], ["Metallica has released a total of 11 studio albums.","\n", "foi"]). % quantos albuns
-process_pattern(["what","year","is",X|_], [Y,"is","from",Z,"!"]) :- compare_album(X,Y), album(_,Y,_,Z,_).% ano de lançamentos do album
-process_pattern(["who","is", "the", "vocalist"|_], ["James Hetfield is the current and only vocalist that Metallica has ever had."]). % vocalista
-process_pattern(["who","is", "the", "drummer"|_], ["Lars Ulrich is the current and only drummer that Metallica has ever had."]). % baterista
-process_pattern(["who","is", "the", "bassist"|_], ["Robert Trujillo is the current bassist of Metallica."]). % baixista
-process_pattern(["who","is", "the", "guitarist"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
-process_pattern(["who","are", "the", "guitarists"|_], ["Metallica has two guitarists, James Hetfield (rhythm) and Kirk Hammett (lead)."]). % guitar
-process_pattern(["what","is","the","shortest","album"|_],["It","is","Ride The Lightning","which","has","Trapped Under Eyes","as","its","shortest","song"]). % album mais curto
-process_pattern(["what","is","the","shortest","music"|_],["It","is","Motorbreath","which","is","the","third","song","from","Metallicas", "first","album!"]). % musica mais curta
-process_pattern(["what","is","the","longest", "music"|_],["It","is","Inamorata","which","is","the","final","song","from","Metallicas", "latest","album!"]).% musicas mais longas
-process_pattern(["what","is","the","longest","album"|_],["It","is","Load","which","has","The Outlaw Torn","as","its","longest","song"]).% albuns mais longos
-process_pattern(["what","do","you","think","about","metallica", "after","black"|_],["Metallica created a whole genre of music, Thrash Metal, and then walked away from it in 1990 because of greed. Some ppl say to me get over it blah blah blah but music to me is after family and friends. I loath anyone who turns their back on a legion of fans and a genre of music and walk away because of greed. They were not poor when they released the black album, they were just greedy. Sad."]). % voce acha que o metalica se vendeu no black album, oque voce acha do black album
-process_pattern([_|Resto],Y) :- process_pattern(Resto,Y).
-process_pattern([],["Sorry","couldn't","quite","catch","you","man"]).
-
-
-same_name_album_song(X) :- album_name(X).
+is_same_name_of_album(X) :-
+    album_name(X).
 album_name("kill").
 album_name("ride").
 album_name("master").
 album_name("and").
 album_name("st").
-album_name("72").
 
+is_name_introduction(X) :-
+    name_introduction(X).
+
+name_introduction("i").
+name_introduction("im").
+name_introduction("my").
+name_introduction("people").
+name_introduction("is").
+% name_introduction(["is","what","people","call","me"]).
+% name_introduction(["is","what","people","like","to","call","me"]).
+name_introduction([]).
+
+% esta_no_dicionario(X).
+
+responses(1, X, [X, "is pretty cool! Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
+responses(2, X, [X, "is pretty bad... Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
+responses(3, X, [X, "is great! My favorite song from the album is", Y]) :- random_between(1,8,R), music(R,Y,X,_,_).
+responses(4, X, [X, "is ok... I would rather listen to", Y, "though"]) :- random_between(1,8,R), album(R,Y,_,_,_).
+
+% ARTISTS
+
+artist("James Hetfield", "59", "vocalist/rhythm guitarist").
+artist("Lars Ulrich", "59", "drummer").
+artist("Kirk Hammett", "60", "lead guitarist").
+artist("Robert Trujillo", "58", "bassist").
 
 % ALBUMS: 
 
@@ -102,7 +84,7 @@ music(6, "Leper Messiah", "Master of Puppets", "Hetfield, Ulrich", "5:40").
 music(7, "Orion", "Master of Puppets", "Burton, Hetfield, Ulrich", "8:28").
 music(8, "Damage, Inc.", "Master of Puppets", "Hetfield, Ulrich, Burton, Hammett", "5:29").
 
-$ ...AND JUSTICE FOR ALL
+% ...AND JUSTICE FOR ALL
 
 album(4, "And Justice For All", "fourth album", "1988", "65:33").
 music(1, "Blackened", "And Justice For All", "Hetfield, Ulrich, Newsted", "6:41").
@@ -244,3 +226,4 @@ music(12, "Inamorata", "72 Seasons", "Hetfield, Ulrich", "11:10").
 % ano de todos os albuns
 % % % % quem sao os membros atuais
 % musicas instrumentais
+% cliff, dave e jason
