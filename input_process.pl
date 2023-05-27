@@ -85,6 +85,7 @@ throw_away_rest_besides_last([_|X], R) :- throw_away_rest_besides_last(X, R).
 process_Pattern(["yes"|_], 1, X, ["Cool! I really love", X]).
 process_Pattern(["no"|_], 1, _, ["You should try it out! It's really good I swear"]).
 process_Pattern([X|Y], 2, _ ,["Nice to meet you", R,"!"]) :- is_name_introduction(X), throw_away_rest_besides_last(Y,R).
+process_Pattern([X], 2, _ ,["Nice to meet you", X]).
 process_Pattern(["good"], 3, _, ["Good to hear!"]).
 process_Pattern(["bad"], 3, _, ["Hope things get better"]).
 process_Pattern(X,_,_,Y) :- process_Pattern(X,Y).
@@ -164,7 +165,6 @@ name_introduction("people").
 name_introduction("is").
 % name_introduction(["is","what","people","call","me"]).
 % name_introduction(["is","what","people","like","to","call","me"]).
-name_introduction(X).
 name_introduction([]).
 
 responses(1, X, [X, "is pretty cool! Have you ever heard of", Y]) :- random_between(1,5,R1),random_between(3,8,R2),album(R1,A,_,_,_),music(R2,Y,A,_,_).
