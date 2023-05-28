@@ -1,1 +1,0 @@
-answersss(1, ["No, my name is Cliff!"]). % exemplo de como deixar o resto
