@@ -1,4 +1,4 @@
-:- [db].
+:- [facts].
 :- use_module(library(strings)).
 :- use_module(library(random)).
 
