@@ -1,7 +1,7 @@
 :- [process_pattern].
 :- use_module(library(strings)).
 :- use_module(library(random)).
-:- initialization(main).
+:- initialization(imp).
 
 title_case(String, TitleCase) :-
     atomic_list_concat(Words, ' ', String),
@@ -61,6 +61,5 @@ readsplit("stop",_,_,_) :- !.
 readsplit("bye",_,_,_) :- !.
 read_split(X, Num, Memory,Y) :- remove_especial_caracters(X, Outs), string_lower(Outs, OutsL),split_string(OutsL, "\s", "\s", Out),temp(Out, Num, Memory,Y). 
 
-main :- write("User: "), read_line_to_codes(user_input, Ascii_imp), string_codes(X, Ascii_imp), read_split(X).
 imp :- write("User: "),read_line_to_codes(user_input, Ascii_imp),string_codes(X, Ascii_imp), read_split(X). 
 
