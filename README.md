@@ -1,5 +1,5 @@
 # Prolog-Chatbot
-A chatbot application for University of Porto's Programming in Logic subject (CC3012).
+## A chatbot application for University of Porto's Programming in Logic subject (CC3012).
 
 The chatbot is called Cliff, he loves Metallica, and you can talk with him almost about everything related to the greatest metal band of all time.
 
